@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 600 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-1834.536737,-661.882973)">
+        <g transform="matrix(20.833333,0,0,20.833333,2328.864122,867.912923)">
+        </g>
+        <text x="2048.611px" y="867.913px" style="font-family:'Arial-ItalicMT', 'Arial', sans-serif;font-style:italic;font-size:20.833px;">Créateur de solutions digitales</text>
+    </g>
+    <g transform="matrix(0.275839,0,0,0.275839,-385.881731,-47.562372)">
+        <g transform="matrix(0.678316,0,0,0.678316,917.096249,-484.453968)">
+            <circle cx="1116.253" cy="1567.253" r="130.253" style="fill:rgb(255,148,0);"/>
+        </g>
+        <g transform="matrix(0,-0.71976,0.71976,0,54.809209,1438.213175)">
+            <path d="M1071.5,1977C1028.037,2038.25 954.812,2145.287 954.812,2250C954.812,2354.713 1022.037,2461.75 1065.5,2523C920.622,2523 796,2392.378 796,2247.5C796,2102.622 926.622,1977 1071.5,1977Z" style="fill:rgb(15,39,71);"/>
+        </g>
+        <g transform="matrix(0,-0.71976,0.71976,0,54.809209,1411.928563)">
+            <path d="M1071.5,1977C1028.037,2038.25 954.812,2145.287 954.812,2250C954.812,2354.713 1022.037,2461.75 1065.5,2523C920.622,2523 796,2392.378 796,2247.5C796,2102.622 926.622,1977 1071.5,1977Z" style="fill:rgb(255,148,0);"/>
+        </g>
+    </g>
+    <g transform="matrix(0.20466,0,0,0.20466,-199.120541,-247.542215)">
+        <text x="1647px" y="2082px" style="font-family:'DINCondensed-Bold', 'DIN Condensed';font-weight:700;font-stretch:condensed;font-size:547.144px;fill:rgb(15,39,71);">MOON</text>
+        <text x="2660.31px" y="2082px" style="font-family:'DINCondensed-Bold', 'DIN Condensed';font-weight:700;font-stretch:condensed;font-size:547.144px;">.</text>
+        <g transform="matrix(547.143682,0,0,547.143682,3805.481827,2082)">
+        </g>
+        <text x="2762.079px" y="2082px" style="font-family:'DINCondensed-Bold', 'DIN Condensed';font-weight:700;font-stretch:condensed;font-size:547.144px;fill:rgb(255,148,0);">INNO<tspan x="3582.794px " y="2082px ">V</tspan></text>
+    </g>
+</svg>

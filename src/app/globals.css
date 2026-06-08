@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
+@theme {
+  /* Light/gray surfaces */
+  --color-bg: #e9ecf2;
+  --color-bg-2: #eef1f6;
+  --color-surface: #ffffff;
+
+  /* Dark blue — used for cards, hero, footer */
+  --color-ink: #101d33;
+  --color-navy: #0a2540;
+  --color-navy-700: #0d2c4d;
+  --color-navy-600: #123a63;
+
+  /* Accents */
+  --color-blue: #1d4ed8;
+  --color-blue-bright: #2f6bff;
+  --color-blue-soft: #93b4ff;
+
+  --color-orange: #ff6a1a;
+  --color-orange-bright: #ff8a3d;
+  --color-orange-soft: #ffb27a;
+
+  /* Text helpers */
+  --color-muted: #57667d; /* muted text on light bg */
+  --color-mist: #aebfd6; /* muted text on dark cards */
+
+  --font-display: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-4xl: 2rem;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-orange);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #dfe4ec;
+}
+::-webkit-scrollbar-thumb {
+  background: #b6c1d2;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0a2540;
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes reveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+  .animate-float {
+    animation: float 7s ease-in-out infinite;
+  }
+
+  /* Auto-scrolling website screenshot inside device mockups */
+  @keyframes deviceScroll {
+    0%,
+    6% {
+      background-position-y: 0%;
+    }
+    50%,
+    56% {
+      background-position-y: 100%;
+    }
+    100% {
+      background-position-y: 0%;
+    }
+  }
+  .animate-screen {
+    animation: deviceScroll 20s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-screen {
+      animation: none;
+    }
+  }
 }
