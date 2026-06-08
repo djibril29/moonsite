@@ -6,6 +6,10 @@ import Image from "next/image";
 type Shot = {
   src: string;
   caption: string;
+  /** Optional title shown in the side detail panel (e.g. the platform name). */
+  title?: string;
+  /** Optional bullet points detailing the work done. */
+  points?: string[];
 };
 
 type Brand = {
@@ -20,6 +24,14 @@ type Brand = {
   gallery: Shot[];
 };
 
+const IT_POINTS = [
+  "Mise en place et configuration de l'espace de travail",
+  "Gestion des boîtes mail et de la messagerie professionnelle",
+  "Administration des comptes, des accès et des permissions",
+  "Sécurité, sauvegardes et protection des données",
+  "Support et accompagnement des équipes au quotidien",
+];
+
 const brands: Brand[] = [
   {
     name: "J-GEN Sénégal",
@@ -27,18 +39,20 @@ const brands: Brand[] = [
     url: "https://www.jgen.sn/",
     urlLabel: "jgen.sn",
     blurb:
-      "Présence digitale complète pour l'association féministe J-GEN Sénégal : site web, identité et ligne éditoriale social media, ainsi que l'administration de leur environnement collaboratif (Microsoft 365 / Google Workspace).",
+      "Présence digitale complète pour l'association de défense des droits des femmes et des filles J-GEN Sénégal : site web, identité et ligne éditoriale social media, ainsi que l'administration de leur environnement collaboratif (Microsoft 365 / Google Workspace).",
     services: ["Site web", "Branding", "Social media", "IT & Cloud"],
     desktop: "/images/cases/jgen-sn.png",
     mobile: "/images/cases/jgen-phone.png",
     gallery: [
       {
         src: "/images/cases/feed-jgen.png",
-        caption: "Feed Instagram — ligne éditoriale & gabarits de posts",
+        caption: "Identité visuelle & ligne éditoriale social media",
       },
       {
-        src: "/images/cases/it-environment.png",
-        caption: "Environnement de travail — Microsoft 365 & Google Workspace",
+        src: "/images/cases/it-workspace.png",
+        caption: "Environnement de travail administré par Moon.innov",
+        title: "Microsoft 365",
+        points: IT_POINTS,
       },
     ],
   },
@@ -55,11 +69,13 @@ const brands: Brand[] = [
     gallery: [
       {
         src: "/images/cases/feed-btlabs.png",
-        caption: "Feed Instagram — univers durable & data scientifique",
+        caption: "Identité visuelle & univers social media",
       },
       {
-        src: "/images/cases/it-environment.png",
-        caption: "Environnement de travail — Microsoft 365 & Google Workspace",
+        src: "/images/cases/it-workspace.png",
+        caption: "Environnement de travail administré par Moon.innov",
+        title: "Google Workspace",
+        points: IT_POINTS,
       },
     ],
   },
@@ -70,6 +86,8 @@ export function Portfolio() {
   const [shotIndex, setShotIndex] = useState(0);
 
   const current = openBrand !== null ? brands[openBrand] : null;
+  const shot = current ? current.gallery[shotIndex] : null;
+  const hasDetails = !!(shot && shot.points && shot.points.length);
 
   const close = useCallback(() => setOpenBrand(null), []);
 
@@ -177,7 +195,7 @@ export function Portfolio() {
                       onClick={() => openLightbox(index, 0)}
                       className="inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-navy-600"
                     >
-                      Feed Instagram
+                      Identité visuelle
                     </button>
                     <button
                       type="button"
@@ -239,50 +257,103 @@ export function Portfolio() {
               </button>
             </div>
 
-            <div className="relative mx-auto aspect-4/5 max-h-[72vh] w-auto overflow-hidden rounded-2xl bg-navy sm:aspect-video sm:w-full">
-              <Image
-                src={current.gallery[shotIndex].src}
-                alt={current.gallery[shotIndex].caption}
-                fill
-                sizes="(min-width: 1024px) 60vw, 100vw"
-                className="object-contain"
-              />
+            <div
+              className={
+                hasDetails
+                  ? "grid items-center gap-6 lg:grid-cols-[1.5fr_1fr]"
+                  : ""
+              }
+            >
+              <div
+                className={`relative overflow-hidden rounded-2xl bg-navy ${
+                  hasDetails
+                    ? "aspect-3/2 w-full"
+                    : "mx-auto aspect-4/5 w-full max-w-sm"
+                }`}
+              >
+                <Image
+                  src={current.gallery[shotIndex].src}
+                  alt={current.gallery[shotIndex].caption}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-contain"
+                />
 
-              {current.gallery.length > 1 && (
-                <>
-                  <button
-                    type="button"
-                    onClick={prev}
-                    aria-label="Image précédente"
-                    className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ink/60 text-white transition-colors hover:bg-ink/80"
-                  >
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M15 18l-6-6 6-6"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={next}
-                    aria-label="Image suivante"
-                    className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ink/60 text-white transition-colors hover:bg-ink/80"
-                  >
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M9 6l6 6-6 6"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </>
+                {current.gallery.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={prev}
+                      aria-label="Image précédente"
+                      className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ink/60 text-white transition-colors hover:bg-ink/80"
+                    >
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M15 18l-6-6 6-6"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={next}
+                      aria-label="Image suivante"
+                      className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ink/60 text-white transition-colors hover:bg-ink/80"
+                    >
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M9 6l6 6-6 6"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {hasDetails && (
+                <div className="rounded-2xl bg-white/5 p-6 text-left ring-1 ring-white/10">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-orange">
+                    Environnement de travail
+                  </p>
+                  <h4 className="mt-2 font-display text-2xl font-bold text-white">
+                    {current.gallery[shotIndex].title}
+                  </h4>
+                  <p className="mt-1 text-sm text-mist">
+                    Déployé et administré par Moon.innov
+                  </p>
+                  <ul className="mt-5 space-y-3">
+                    {current.gallery[shotIndex].points?.map((pt) => (
+                      <li
+                        key={pt}
+                        className="flex items-start gap-3 text-sm text-mist"
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          className="mt-0.5 shrink-0 text-orange"
+                        >
+                          <path
+                            d="M5 13l4 4L19 7"
+                            stroke="currentColor"
+                            strokeWidth="2.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
             </div>
 
