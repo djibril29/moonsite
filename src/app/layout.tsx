@@ -9,8 +9,21 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700", "800"],
 });
 
+/**
+ * Absolute base used to build Open Graph / Twitter image URLs.
+ * Prefers an explicit site URL, then the Vercel deployment URL, and finally
+ * the production custom domain — so link previews resolve on every environment.
+ */
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? process.env.NEXT_PUBLIC_SITE_URL
+  : process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "https://moon-innov.sn";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://moon-innov.sn"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Moon.innov — Studio digital au Sénégal",
     template: "%s · Moon.innov",
@@ -28,8 +41,16 @@ export const metadata: Metadata = {
     title: "Moon.innov — Studio digital au Sénégal",
     description:
       "Nous délivrons des solutions digitales innovantes pour l'Afrique.",
+    url: siteUrl,
+    siteName: "Moon.innov",
     locale: "fr_SN",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Moon.innov — Studio digital au Sénégal",
+    description:
+      "Nous délivrons des solutions digitales innovantes pour l'Afrique.",
   },
   icons: {
     icon: "/site-fav-moon.svg",
