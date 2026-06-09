@@ -95,7 +95,7 @@ export default function OpengraphImage() {
             }}
           />
           <div style={{ display: "flex", fontSize: 28, color: "#ffffff" }}>
-            moon-innov.sn
+            mooninnov.com
           </div>
         </div>
       </div>

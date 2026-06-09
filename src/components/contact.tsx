@@ -15,7 +15,7 @@ export function Contact() {
 
               <div className="mt-8 space-y-4">
                 <a
-                  href="mailto:contact@moon-innov.sn"
+                  href="mailto:contact@mooninnov.com"
                   className="flex items-center gap-3 text-white transition-colors hover:text-orange"
                 >
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-orange">
@@ -29,7 +29,7 @@ export function Contact() {
                       />
                     </svg>
                   </span>
-                  contact@moon-innov.sn
+                  contact@mooninnov.com
                 </a>
                 <a
                   href="tel:+221770131208"

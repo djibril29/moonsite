@@ -20,7 +20,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : "https://moon-innov.sn";
+  : "https://mooninnov.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
