@@ -2,10 +2,9 @@
 
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import {
-  sendContactMessage,
-  initialContactState,
-} from "@/app/actions";
+import { sendContactMessage, type ContactState } from "@/app/actions";
+
+const initialContactState: ContactState = { status: "idle", message: "" };
 
 export function Contact() {
   const [state, formAction] = useActionState(

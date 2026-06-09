@@ -7,11 +7,6 @@ export type ContactState = {
   message: string;
 };
 
-export const initialContactState: ContactState = {
-  status: "idle",
-  message: "",
-};
-
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function sendContactMessage(
