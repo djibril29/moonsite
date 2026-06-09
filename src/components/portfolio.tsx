@@ -41,8 +41,8 @@ const brands: Brand[] = [
     blurb:
       "Présence digitale complète pour l'association de défense des droits des femmes et des filles J-GEN Sénégal : site web, identité et ligne éditoriale social media, ainsi que l'administration de leur environnement collaboratif (Microsoft 365 / Google Workspace).",
     services: ["Site web", "Branding", "Social media", "IT & Cloud"],
-    desktop: "/images/cases/jgen-sn.png",
-    mobile: "/images/cases/jgen-phone.png",
+    desktop: "/images/cases/jgen-desktop.webp",
+    mobile: "/images/cases/jgen-mobile.webp",
     gallery: [
       {
         src: "/images/cases/feed-jgen.png",
@@ -64,8 +64,8 @@ const brands: Brand[] = [
     blurb:
       "Plateforme web et univers social media pour le cabinet d'études d'impact environnemental BTLABS Consulting, avec la mise en place et l'administration de leur environnement de travail cloud sécurisé.",
     services: ["Site web", "Social media", "Marketing", "IT & Cloud"],
-    desktop: "/images/cases/btlabsconsulting.png",
-    mobile: "/images/cases/btlabs-phone.png",
+    desktop: "/images/cases/btlabs-desktop.webp",
+    mobile: "/images/cases/btlabs-mobile.webp",
     gallery: [
       {
         src: "/images/cases/feed-btlabs.png",
