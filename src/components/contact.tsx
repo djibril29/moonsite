@@ -1,4 +1,18 @@
+"use client";
+
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
+import {
+  sendContactMessage,
+  initialContactState,
+} from "@/app/actions";
+
 export function Contact() {
+  const [state, formAction] = useActionState(
+    sendContactMessage,
+    initialContactState
+  );
+
   return (
     <section id="contact" className="relative bg-bg-2 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -65,7 +79,7 @@ export function Contact() {
               </div>
             </div>
 
-            <form className="glass rounded-3xl p-6 sm:p-8" action="#" noValidate>
+            <form action={formAction} className="glass rounded-3xl p-6 sm:p-8">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field label="Nom complet" id="name" placeholder="Awa Diop" />
                 <Field
@@ -92,26 +106,41 @@ export function Contact() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={4}
+                  required
                   placeholder="Décrivez votre idée en quelques lignes…"
                   className="w-full resize-none rounded-xl border border-white/10 bg-ink/60 px-4 py-3 text-white placeholder:text-mist/50 outline-none transition focus:border-orange focus:ring-2 focus:ring-orange/30"
                 />
               </div>
-              <button
-                type="submit"
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-orange px-7 py-3.5 text-base font-semibold text-ink shadow-lg shadow-orange/25 transition-all hover:bg-orange-bright"
-              >
-                Envoyer ma demande
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M5 12h14m0 0-6-6m6 6-6 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
+
+              {/* Honeypot — hidden from humans, catches bots. */}
+              <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
+                <label htmlFor="website">Ne pas remplir</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
+              <SubmitButton />
+
+              {state.status !== "idle" && (
+                <p
+                  role="status"
+                  aria-live="polite"
+                  className={`mt-4 rounded-xl px-4 py-3 text-sm ${
+                    state.status === "success"
+                      ? "bg-emerald-500/15 text-emerald-200"
+                      : "bg-red-500/15 text-red-200"
+                  }`}
+                >
+                  {state.message}
+                </p>
+              )}
             </form>
           </div>
         </div>
@@ -143,11 +172,37 @@ function Field({
       </label>
       <input
         id={id}
+        name={id}
         type={type}
         required={required}
         placeholder={placeholder}
         className="w-full rounded-xl border border-white/10 bg-ink/60 px-4 py-3 text-white placeholder:text-mist/50 outline-none transition focus:border-orange focus:ring-2 focus:ring-orange/30"
       />
     </div>
+  );
+}
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-orange px-7 py-3.5 text-base font-semibold text-ink shadow-lg shadow-orange/25 transition-all hover:bg-orange-bright disabled:cursor-not-allowed disabled:opacity-70"
+    >
+      {pending ? "Envoi en cours…" : "Envoyer ma demande"}
+      {!pending && (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M5 12h14m0 0-6-6m6 6-6 6"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      )}
+    </button>
   );
 }
